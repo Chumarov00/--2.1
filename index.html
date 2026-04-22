@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AR-гид по Йошкар-Оле</title>
+  <meta name="description" content="AR-гид по историческим местам Йошкар-Олы с видео поверх реального изображения.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html" aria-label="На главную">
+        <span class="brand__logo" aria-hidden="true"></span>
+        <span class="brand__text">AR-гид</span>
+        <span class="brand__badge">Beta</span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a class="nav__link" href="#places">Места</a>
+        <a class="nav__link" href="#how">Как пользоваться</a>
+        <a class="nav__link" href="#support">Поддержка</a>
+      </nav>
+
+      <div class="actions">
+        <a class="btn btn--ghost" href="#how">Инструкция</a>
+        <a class="btn btn--primary" href="camera.html">Запустить камеру</a>
+        <button class="iconbtn" type="button" aria-label="Справка" id="helpBtn">?</button>
+      </div>
+
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="drawer" hidden>
+      <a class="drawer__link" href="#places">Места</a>
+      <a class="drawer__link" href="#how">Как пользоваться</a>
+      <a class="drawer__link" href="#support">Поддержка</a>
+      <div class="drawer__actions">
+        <a class="btn btn--ghost" href="#how">Инструкция</a>
+        <a class="btn btn--primary" href="camera.html">Запустить камеру</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel hero">
+      <p class="eyebrow">Призраки прошлого</p>
+      <h1 class="hero__title">AR-прогулка по историческим местам Йошкар-Олы</h1>
+      <p class="hero__text">
+        Выберите объект, откройте камеру и наведите телефон на метку. Поверх реального изображения запустится видео, а справа можно будет менять прозрачность.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="camera.html">Запустить общий режим</a>
+        <a class="btn btn--ghost" href="#places">Выбрать объект</a>
+      </div>
+    </section>
+
+    <section class="panel" id="how">
+      <div class="sectionHead">
+        <h2 class="section__title">Как пользоваться</h2>
+        <p class="section__text">Эта инструкция уже подходит для GitHub Pages. Ничего дополнительно собирать не нужно.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="step__num">1</span><div><strong>Открой страницу проекта.</strong><br>Нажми кнопку запуска камеры на главной странице или у нужной карточки.</div></li>
+        <li class="step"><span class="step__num">2</span><div><strong>Разреши доступ к камере.</strong><br>Без этого MindAR не сможет распознать метку.</div></li>
+        <li class="step"><span class="step__num">3</span><div><strong>Наведись на метку.</strong><br>Держи телефон устойчиво 1–2 секунды, чтобы видео успело стартовать.</div></li>
+        <li class="step"><span class="step__num">4</span><div><strong>Уменьшай прозрачность видео.</strong><br>Так получится эффект призрака поверх настоящего здания или фотографии.</div></li>
+      </ol>
+    </section>
+
+    <section class="panel" id="places">
+      <div class="sectionHead">
+        <h2 class="section__title">Исторические места</h2>
+        <p class="section__text">На телефоне листай карточки свайпом. На компьютере используй стрелки или перетаскивай ленту мышкой.</p>
+      </div>
+
+      <div class="placeCarousel">
+        <button class="carouselBtn carouselBtn--prev" id="placesPrev" type="button" aria-label="Предыдущие карточки" hidden>&#8249;</button>
+        <div class="placeGrid" id="placeGrid"></div>
+        <button class="carouselBtn carouselBtn--next" id="placesNext" type="button" aria-label="Следующие карточки" hidden>&#8250;</button>
+      </div>
+    </section>
+
+    <section class="panel soonSection" id="soon">
+      <div class="soonSection__head">
+        <h2 class="section__title">Скоро появится</h2>
+        <span class="soonBadge">В разработке</span>
+      </div>
+
+      <div class="soonGrid">
+        <article class="soonCard">
+          <div class="soonCard__bg"></div>
+          <div class="soonCard__content">
+            <span class="soonCard__tag">Скоро</span>
+            <h3 class="soonCard__title">Вокзальная терраса</h3>
+            <p class="soonCard__text">
+              Будущая точка с историей городских пересадочных узлов.
+            </p>
+            <div class="soonCard__status">В разработке</div>
+            <button class="soonCard__button" type="button" disabled>В разработке</button>
+          </div>
+        </article>
+
+        <article class="soonCard">
+          <div class="soonCard__bg"></div>
+          <div class="soonCard__content">
+            <span class="soonCard__tag">Скоро</span>
+            <h3 class="soonCard__title">Садовая галерея</h3>
+            <p class="soonCard__text">
+              Локация о прогулочных зонах и первых городских садах.
+            </p>
+            <div class="soonCard__status">В разработке</div>
+            <button class="soonCard__button" type="button" disabled>В разработке</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel roadmapSection">
+      <div class="roadmapCard">
+        <div class="roadmapCard__left">
+          <span class="roadmapCard__tag">В разработке</span>
+          <h2 class="roadmapCard__title">Готовятся новые маршруты</h2>
+          <p class="roadmapCard__text">
+            Скоро добавим новые точки, более длинные AR-истории и партнёрские форматы.
+          </p>
+
+          <div class="roadmapCard__actions">
+            <button class="roadmapBtn roadmapBtn--primary" type="button" disabled>Смотреть планы</button>
+            <a class="roadmapBtn roadmapBtn--ghost" href="#places">Открыть объекты</a>
+          </div>
+        </div>
+
+        <div class="roadmapCard__art" aria-hidden="true">
+          <div class="roadmapShape roadmapShape--purple"></div>
+          <div class="roadmapShape roadmapShape--blue"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="support">
+      <div class="sectionHead">
+        <h2 class="section__title">Поддержка</h2>
+        <p class="section__text">Если объект плохо распознаётся, добавь света, убери блики и держи метку в кадре чуть дольше.</p>
+      </div>
+      <div class="supportBox">
+        <div>
+          <strong>Что уже исправлено в этой версии:</strong>
+          <ul class="supportList">
+            <li>убраны битые ссылки и неправильные пути к фото;</li>
+            <li>AR-логика переведена в стабильную рабочую схему;</li>
+            <li>добавлена нормальная структура папок для GitHub;</li>
+            <li>кнопки карточек открывают правильное место;</li>
+            <li>карточки снова листаются как лента.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="places.js"></script>
+  <script src="header.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
