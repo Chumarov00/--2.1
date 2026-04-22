@@ -206,8 +206,8 @@
       pointer-events: none;
     }
 
-    video::-webkit-media-controls { display: none !important; }
-    video::-webkit-media-controls-panel { display: none !important; }
+    video::-webkit-media-controls { display:none !important; }
+    video::-webkit-media-controls-panel { display:none !important; }
 
     #videoControls {
       position: absolute;
@@ -347,7 +347,6 @@
 </head>
 
 <body>
-
   <div class="topBar">
     <a class="pillBtn" href="./camera.html">← Разделы</a>
     <div class="status" id="status">Нажмите «Запустить AR»</div>
@@ -357,7 +356,7 @@
     <div class="rotateCard">
       <div class="rotateIcon">📱↻</div>
       <div class="rotateTitle">Поверни телефон горизонтально</div>
-      <div class="rotateText">Так видео поверх здания будет отображаться правильно и смотреться лучше.</div>
+      <div class="rotateText">Запуск AR начнётся только в горизонтальном положении. Если уже нажал кнопку — система стартует автоматически после поворота.</div>
     </div>
   </div>
 
@@ -424,9 +423,7 @@
 
       <a-entity light="type: hemisphere; intensity: 0.9"></a-entity>
       <a-entity light="type: directional; intensity: 0.9" position="1 2 1"></a-entity>
-
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
       <a-entity id="targetsRoot"></a-entity>
     </a-scene>
   </div>
@@ -463,6 +460,9 @@
       const targetsRoot = document.getElementById("targetsRoot");
 
       let arStartedOnce = false;
+      let arStarting = false;
+      let pendingStartAfterRotate = false;
+
       let currentIndex = null;
       let currentSrc = "";
       let isStartingVideo = false;
@@ -502,23 +502,38 @@
         return window.innerHeight > window.innerWidth;
       }
 
-      function updateRotateHint() {
-        if (!arStartedOnce) {
-          rotateHint.style.display = "none";
-          return;
-        }
+      function canStartARNow() {
+        return !isMobileLike() || !isPortrait();
+      }
 
+      function updateRotateHint() {
         if (!isMobileLike()) {
           rotateHint.style.display = "none";
           return;
         }
 
-        rotateHint.style.display = isPortrait() ? "flex" : "none";
+        if (!arStartedOnce) {
+          rotateHint.style.display = isPortrait() ? "flex" : "none";
+          return;
+        }
+
+        rotateHint.style.display = "none";
       }
 
-      window.addEventListener("resize", updateRotateHint);
+      function handleOrientationChange() {
+        updateRotateHint();
+
+        if (!arStartedOnce && pendingStartAfterRotate && canStartARNow()) {
+          startAR();
+        }
+      }
+
+      window.addEventListener("resize", () => {
+        setTimeout(handleOrientationChange, 120);
+      });
+
       window.addEventListener("orientationchange", () => {
-        setTimeout(updateRotateHint, 150);
+        setTimeout(handleOrientationChange, 180);
       });
 
       function hardenInlineVideo() {
@@ -681,10 +696,23 @@
       }
 
       async function startAR() {
+        if (arStartedOnce || arStarting) return;
+
+        if (!canStartARNow()) {
+          pendingStartAfterRotate = true;
+          updateRotateHint();
+          setStatus("Поверни телефон горизонтально — запуск продолжится автоматически");
+          return;
+        }
+
+        arStarting = true;
+        pendingStartAfterRotate = false;
+
         buildTargets();
 
         const mindar = document.getElementById("scene").systems["mindar-image-system"];
         if (!mindar) {
+          arStarting = false;
           setStatus("MindAR system не найден");
           alert("MindAR system не найден.");
           return;
@@ -708,12 +736,15 @@
           console.error("START AR ERROR:", error);
           setStatus("Не удалось запустить камеру");
           alert("Не удалось запустить камеру. Проверь разрешение браузера и что камера не занята.");
+        } finally {
+          arStarting = false;
         }
       }
 
       reloadBtn.addEventListener("click", () => location.reload());
       startBtn.addEventListener("click", startAR);
 
+      updateRotateHint();
       setStatus("Нажмите «Запустить AR»");
     })();
   </script>
