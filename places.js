@@ -7,7 +7,7 @@ window.PLACES = [
     video: "assets/videos/bulygin.mp4",
     group: "homes",
     markerStart: 0,
-    markerEnd: 18,
+    markerEnd: 17,
     enabled: true,
     description: "Исторический особняк в Йошкар-Оле. Сейчас здание связано с музейной историей города и используется как одна из точек маршрута виртуального гида."
   },
@@ -18,8 +18,8 @@ window.PLACES = [
     image: "assets/images/naumov.jpg",
     video: "assets/videos/naumov.mp4",
     group: "homes",
-    markerStart: 19,
-    markerEnd: 42,
+    markerStart: 18,
+    markerEnd: 41,
     enabled: true,
     description: "Первый этаж дома купца Наумова каменный, второй — деревянный, украшен резьбой. На первом этаже располагалась торговая лавка, на втором — жилые комнаты."
   },
@@ -30,8 +30,8 @@ window.PLACES = [
     image: "assets/images/pchelin.jpg",
     video: "assets/videos/pchelin.mp4",
     group: "homes",
-    markerStart: 43,
-    markerEnd: 56,
+    markerStart: 42,
+    markerEnd: 55,
     enabled: true,
     description: "Дом купца Пчелина находится в исторической части Йошкар-Олы и относится к числу старых городских зданий, которые помогают показать прошлое города через AR-сцену."
   },
